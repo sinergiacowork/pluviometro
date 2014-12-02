@@ -26,6 +26,7 @@ GEM
       celluloid (~> 0.16.0)
     timers (4.0.1)
       hitimes
+    tzinfo (0.3.42)
     unicorn (4.8.3)
       kgio (~> 2.6)
       rack
@@ -41,4 +42,5 @@ DEPENDENCIES
   shoden (= 0.4.0)
   shoden-contrib (= 0.1.1)
   sucker_punch
+  tzinfo
   unicorn
