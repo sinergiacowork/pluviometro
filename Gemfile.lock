@@ -6,10 +6,17 @@ GEM
     cuba (3.3.0)
       rack
     hitimes (1.2.2)
+    httparty (0.13.1)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
+    json (1.8.1)
     kgio (2.9.2)
+    multi_xml (0.5.5)
     pg (0.17.1)
     rack (1.5.2)
     raindrops (0.13.0)
+    ruby_spark (1.0.0)
+      httparty (~> 0.13)
     sequel (4.11.0)
     shoden (0.4.0)
       sequel (~> 4.11.0)
@@ -30,6 +37,7 @@ PLATFORMS
 DEPENDENCIES
   cuba (= 3.3.0)
   pg
+  ruby_spark
   shoden (= 0.4.0)
   shoden-contrib (= 0.1.1)
   sucker_punch
