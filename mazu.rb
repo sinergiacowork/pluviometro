@@ -10,23 +10,34 @@ Shoden.setup
 MeasureRainJob.new.async.perform
 
 Cuba.define do
+  def write_json(out)
+   res['Content-Type'] = 'application/json'
+
+   res.write JSON.dump(out)
+  end
+
+  def rain_output(rain)
+    tz = TZInfo::Timezone.get('America/Montevideo')
+    time = Time.at(rain.created_at.to_i)
+
+    {
+      timestamp: rain.created_at,
+      datetime: tz.utc_to_local(time),
+      mm: rain.mm
+    }
+  end
+
+  on "all" do
+    drops = []
+    Rain.all.each { |rain| drops << rain_output(rain) }
+
+    write_json(drops)
+  end
+
   on root do
     rain = Rain.last
+    out = !rain.nil? ? rain_output(rain) : {}
 
-    out = if !rain.nil?
-      tz = TZInfo::Timezone.get('America/Montevideo')
-      time = Time.at(rain.created_at.to_i)
-
-      {
-        timestamp: rain.created_at,
-        datetime: tz.utc_to_local(time),
-        mm: rain.mm
-      }
-    else
-      {}
-    end
-
-   res['Content-Type'] = 'application/json'
-   res.write JSON.dump(out)
+    write_json(out)
   end
 end
