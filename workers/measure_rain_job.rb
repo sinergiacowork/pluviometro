@@ -2,6 +2,7 @@ require 'sucker_punch'
 
 class MeasureRainJob
   include SuckerPunch::Job
+  workers 1
 
   THRESHOLD = 5 * 60
 
